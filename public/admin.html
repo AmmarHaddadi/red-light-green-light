@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Squid Game - Front Man Control Console</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="admin-container">
+    <!-- Header -->
+    <header class="admin-header">
+      <div>
+        <div class="symbols" style="justify-content: flex-start; margin-bottom: 4px;">○ △ □</div>
+        <h1 class="admin-title">FRONT MAN CONSOLE</h1>
+      </div>
+      <div style="display: flex; gap: 12px; align-items: center;">
+        <button id="admin-audio-toggle" class="btn btn-secondary btn-sm">
+          🔊 Enable Stadium Audio
+        </button>
+        <span id="connection-status" class="player-badge-status badge-alive">CONNECTED</span>
+      </div>
+    </header>
+
+    <!-- Phase & Statistics Banner -->
+    <div id="admin-banner" class="admin-banner">
+      <div>
+        <div class="status-label">Current Phase</div>
+        <div id="banner-phase-text" class="status-value" style="color: var(--squid-pink);">LOBBY</div>
+        <div id="banner-timer-text" style="font-size: 0.95rem; color: var(--text-muted); margin-top: 4px;">
+          Waiting to start
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 32px; flex-wrap: wrap;">
+        <div class="status-stat">
+          <div class="status-label">Alive</div>
+          <div id="stat-alive" class="status-value" style="color: var(--squid-green);">0</div>
+        </div>
+        <div class="status-stat">
+          <div class="status-label">Eliminated</div>
+          <div id="stat-eliminated" class="status-value" style="color: var(--squid-red);">0</div>
+        </div>
+        <div class="status-stat">
+          <div class="status-label">Total Players</div>
+          <div id="stat-total" class="status-value">0</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Controls -->
+    <div class="control-panel">
+      <!-- Quick Game Actions -->
+      <div class="panel-card">
+        <h2 class="panel-title">Game Controls</h2>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <button id="btn-start-game" class="btn btn-primary" style="font-size: 1.1rem;">
+            ▶ Start Game (3s Countdown)
+          </button>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <button id="btn-force-green" class="btn btn-green">
+              🟢 Green Light
+            </button>
+            <button id="btn-force-red" class="btn btn-red">
+              🔴 Red Light
+            </button>
+          </div>
+          <button id="btn-reset-game" class="btn btn-secondary">
+            ↺ Reset Round & Revive All
+          </button>
+        </div>
+      </div>
+
+      <!-- Mode & Timing Settings -->
+      <div class="panel-card">
+        <h2 class="panel-title">Game Mode & Timers</h2>
+        <form id="config-form">
+          <div class="form-group">
+            <label class="form-label">Game Mode</label>
+            <select id="select-mode" class="form-input">
+              <option value="AUTOMATIC">AUTOMATIC (Random Intervals)</option>
+              <option value="MANUAL">MANUAL (Admin Controls)</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Min Green (s)</label>
+              <input type="number" id="input-min-green" class="form-input" min="1" max="60" step="0.5">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Max Green (s)</label>
+              <input type="number" id="input-max-green" class="form-input" min="1" max="60" step="0.5">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Min Red (s)</label>
+              <input type="number" id="input-min-red" class="form-input" min="1" max="60" step="0.5">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Max Red (s)</label>
+              <input type="number" id="input-max-red" class="form-input" min="1" max="60" step="0.5">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Grace Period (ms)</label>
+              <input type="number" id="input-grace" class="form-input" min="0" max="2000" step="50">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Sensitivity (m/s²)</label>
+              <input type="number" id="input-threshold" class="form-input" min="0.5" max="20" step="0.5">
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-secondary btn-sm" style="width: 100%; margin-top: 8px;">
+            Save Configurations
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Player Roster Grid -->
+    <div style="margin-top: 16px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+        <h2 class="panel-title" style="margin-bottom: 0;">Live Player Roster</h2>
+        <span id="player-count-indicator" style="color: var(--text-muted); font-size: 0.9rem;">0 Players Connected</span>
+      </div>
+
+      <div id="player-roster" class="player-grid">
+        <div style="grid-column: 1 / -1; text-align: center; color: var(--text-muted); padding: 48px;">
+          No players connected yet.<br>
+          Direct players to <strong style="color: white;">/play</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/admin.js"></script>
+</body>
+</html>

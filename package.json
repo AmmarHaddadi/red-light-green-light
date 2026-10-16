@@ -1,0 +1,11 @@
+{
+  "name": "redgreen",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "bun run src/server.ts",
+    "dev": "bun --watch src/server.ts",
+    "cert": "bash generate-cert.sh",
+    "test": "bun test"
+  }
+}

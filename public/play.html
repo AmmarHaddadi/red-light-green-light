@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Player Arena - Red Light, Green Light</title>
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    /* Prevent pull-to-refresh on mobile */
+    body {
+      overscroll-behavior-y: contain;
+    }
+  </style>
+</head>
+<body>
+  <!-- Join / Calibration Screen -->
+  <div id="join-screen" class="landing-container">
+    <div class="symbols">○ △ □</div>
+    <h1 class="landing-title">Join Arena</h1>
+    <p class="landing-subtitle">Squid Game: Red Light, Green Light</p>
+
+    <div style="margin-bottom: 24px; text-align: left;">
+      <label class="form-label" for="username-input">Enter Your Codename / Username:</label>
+      <input type="text" id="username-input" class="form-input" style="width: 100%; font-size: 1.2rem; padding: 14px;" placeholder="e.g. Seong Gi-hun" maxlength="20" autofocus autocomplete="off">
+      <div id="join-error" style="color: var(--squid-red); font-size: 0.9rem; margin-top: 8px; display: none;"></div>
+    </div>
+
+    <div class="motion-meter-container" style="margin: 0 auto 24px auto;">
+      <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-muted);">
+        <span>Motion Sensor Test</span>
+        <span id="motion-test-val">0.0</span>
+      </div>
+      <div class="motion-meter-bar">
+        <div id="motion-test-fill" class="motion-meter-fill"></div>
+      </div>
+      <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 6px;">
+        Shake phone slightly to test sensor response
+      </div>
+    </div>
+
+    <button id="join-btn" class="btn btn-primary" style="width: 100%; padding: 18px; font-size: 1.2rem;">
+      ⚡ Calibrate & Enter
+    </button>
+
+    <div style="margin-top: 24px; font-size: 0.8rem; color: var(--text-muted); line-height: 1.5;">
+      Tapping above unlocks audio alerts and requests accelerometer permissions required for motion detection.
+    </div>
+  </div>
+
+  <!-- In-Game Arena Screen (Hidden initially) -->
+  <div id="game-screen" class="player-container" style="display: none;">
+    <div class="player-header">
+      <div>
+        <div class="player-name" id="display-username">Player</div>
+        <div class="player-badge" id="display-number">#---</div>
+      </div>
+      <div style="text-align: right;">
+        <span class="player-badge-status badge-alive" id="player-status-badge">ALIVE</span>
+      </div>
+    </div>
+
+    <div id="arena-card" class="arena-box">
+      <div class="phase-title" id="phase-title">WAITING</div>
+      <div class="phase-instruction" id="phase-instruction">Waiting for the Front Man to begin...</div>
+
+      <div class="motion-meter-container">
+        <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-muted);">
+          <span>Live Motion</span>
+          <span id="live-motion-val">0.0 m/s²</span>
+        </div>
+        <div class="motion-meter-bar">
+          <div id="live-motion-fill" class="motion-meter-fill"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Elimination Overlay (Hidden initially) -->
+  <div id="eliminated-screen" class="eliminated-overlay" style="display: none;">
+    <div class="symbols" style="color: white; font-size: 2.5rem; margin-bottom: 16px;">✕ ✕ ✕</div>
+    <h1 class="eliminated-title">ELIMINATED</h1>
+    <p class="eliminated-subtitle" id="elim-player-tag">PLAYER #---</p>
+    <p style="font-size: 1.1rem; opacity: 0.9; margin-bottom: 32px;" id="elim-delta-info">
+      Movement detected during Red Light!
+    </p>
+    <button id="silence-alarm-btn" class="btn btn-secondary" style="background: rgba(0,0,0,0.6); color: white; border: 2px solid white;">
+      🔕 Silence Alarm
+    </button>
+  </div>
+
+  <script src="/player.js"></script>
+</body>
+</html>
