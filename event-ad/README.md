@@ -31,6 +31,6 @@ Edit `config.js`:
 - `registrationUrl`: optional destination for clicking the QR.
 - `questions`, `eventNote`, `slideDuration`: edit the looping text, footer and rotation interval.
 
-Outdoor activities are advertised at 3:30 PM. Change the time in index.html if needed. Keep game names short for TV legibility.
+Outdoor activities are advertised at 4:00 PM. Change the time in index.html if needed. Keep game names short for TV legibility.
 
 The original game application outside this directory is independent of this advertisement.
