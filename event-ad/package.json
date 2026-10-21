@@ -1,0 +1,6 @@
+{
+  "name": "squid-game-event-ad",
+  "private": true,
+  "type": "module",
+  "scripts": { "dev": "bun serve.ts", "build": "bun build.ts" }
+}

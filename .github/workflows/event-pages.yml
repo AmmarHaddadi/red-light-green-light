@@ -1,0 +1,36 @@
+name: Publish event advertisement
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "event-ad/**"
+      - ".github/workflows/event-pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: event-pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: oven-sh/setup-bun@v2
+      - run: bun run build
+        working-directory: event-ad
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: event-ad/dist
+      - uses: actions/deploy-pages@v4
+        id: deployment
