@@ -5,7 +5,8 @@
   const games = config.games?.length ? config.games : ['GAME LINEUP COMING SOON'];
   const questions = config.questions?.length ? config.questions : ['WILL YOU PLAY?'];
   document.documentElement.style.setProperty('--slide-duration', `${duration}ms`);
-  $('event-note').textContent = config.eventNote || '100 PLAYERS · COUNTLESS MEMORIES';
+  // Footer is commented out in index.html.
+  if ($('event-note')) $('event-note').textContent = config.eventNote || '100 PLAYERS · COUNTLESS MEMORIES';
   let index = 0;
   let transitioning = false;
   function swap(element, text) {
@@ -72,7 +73,8 @@
     ['days', 'hours', 'minutes', 'seconds'].forEach((id, i) => { $(id).textContent = String(values[i]).padStart(2, '0'); });
   }
   showGame(false);
-  $('question').textContent = questions[0];
+  // Rotating subtitle is commented out in index.html.
+  // $('question').textContent = questions[0];
   tick();
   setInterval(tick, 1000);
   setInterval(() => {
@@ -80,7 +82,7 @@
     transitioning = true;
     index++;
     showGame(true);
-    swap($('question'), questions[index % questions.length]);
+    // swap($('question'), questions[index % questions.length]);
     photoIndex++;
     showPhoto();
     setTimeout(() => { transitioning = false; }, 750);
